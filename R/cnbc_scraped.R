@@ -12,8 +12,6 @@ urls <- c(Business = "https://www.cnbc.com/business/",
           Tech = "https://www.cnbc.com/technology/",
           Politics = "https://www.cnbc.com/politics/")
 
-
-
 all_headlines <- list()
 all_lengths <- list()
 all_sources <- list()
@@ -43,7 +41,6 @@ cnbc_tbl$length <- sapply(cnbc_tbl$length, `[`, 1)
 
 cnbc_tbl$source <- factor(cnbc_tbl$source)
 
-
 #Analysis
 anova_result <- aov(length~source, data = cnbc_tbl)
 
@@ -55,7 +52,6 @@ dfn <- summary(anova_result)[[1]]$"Df"[1]
 is_sig <- ifelse(p_value <= 0.05, "was", "was not")
 
 
-
 #Visualization
 cnbc_tbl %>%
   ggplot(aes(x=source, y =length)) +
@@ -64,7 +60,7 @@ cnbc_tbl %>%
 #Publication
 paste("The results of an ANOVA comparing lengths across sources was ", 
       "r(",dfn, "," ,dfd,") ", "= ", str_remove(f_value, "^0+"),
-      " p = ", str_remove(p_value, "^0+"), '.', 'This test ', is_sig, " statistically significant", sep = "")
+      " p = ", str_remove(p_value, "^0+"), '.s', 'This test ', is_sig, " statistically significant", sep = "")
 
 
 
